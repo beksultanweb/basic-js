@@ -19,7 +19,15 @@ function transform(arr) {
   if(Array.isArray(arr) === false) throw new Error("'arr' parameter must be an instance of the Array!")
   // if(arr.length === 0) return []
   // if(arr.length == 1) return arr
-  let res = [...arr], newAr = []
+
+  let myAr = []
+
+  for(let i = 0; i < arr.length; i++) {
+    if(typeof arr[i] !== undefined) myAr.push(arr[i])
+  }
+
+  let res = [...myAr], newAr = []
+
   for(let i = 0; i<arr.length; i++){
     if(typeof arr[i] === "boolean") return arr
   }
@@ -27,7 +35,7 @@ function transform(arr) {
     res.splice(0, 1)
     return res
   }
-  if(arr.length == 0) return []
+  if(arr.length === 0) return []
   else {
     res.forEach((el, index) => {
       if(el === '--double-next') {
@@ -51,9 +59,12 @@ function transform(arr) {
         newAr.push(...res)
       }
     })
-    return newAr
   }
+  console.log(newAr.length === 0 ? myAr : newAr)
+  return newAr.length === 0 ? myAr : newAr
 }
+
+transform([ undefined, 1, 2, 3 ])
 
 module.exports = {
   transform
